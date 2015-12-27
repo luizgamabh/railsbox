@@ -1,4 +1,6 @@
-site :opscode
+source "https://supermarket.chef.io"
+
+metadata
 
 cookbook 'apt', '~> 2.8.2'
 cookbook 'htop', '~> 2.0.0'
