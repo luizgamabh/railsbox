@@ -5,5 +5,5 @@ license          'All rights reserved'
 description      'Installs/Configures RailsBox2016'
 long_description 'Installs/Configures RailsBox2016'
 
-version          '0.1.0'
+version          '1.0.0'
 
