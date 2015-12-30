@@ -113,6 +113,7 @@ config.vm.provision :chef_solo do |chef|
         user_installs: [
           {
             user: 'vagrant',
+            upgrade: 'head',
             rubies: ['2.2.1'],
             rvm_gem_options: "--no-ri --no-rdoc",
             default_ruby: '2.2.1',
