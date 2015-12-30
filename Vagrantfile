@@ -102,7 +102,7 @@ config.vm.provision :chef_solo do |chef|
     chef.add_recipe "xml"
     chef.add_recipe "custombox"
     chef.add_recipe "postgresql"
-    chef.add_recipe "postgresql::server_debian"
+    chef.add_recipe "postgresql::server"
 
     chef.json = {
       java: {
