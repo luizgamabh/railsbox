@@ -101,6 +101,8 @@ config.vm.provision :chef_solo do |chef|
     chef.add_recipe "redisio::enable"
     chef.add_recipe "xml"
     chef.add_recipe "custombox"
+    chef.add_recipe "postgresql"
+    chef.add_recipe "postgresql::server_debian"
 
     chef.json = {
       java: {
@@ -138,6 +140,14 @@ config.vm.provision :chef_solo do |chef|
           run_state: 'start'
         },
       },
+      postgresql: {
+        config: {
+          port: 5432
+        },
+        password: {
+          'postgres': '@r00t@'
+        }
+      }
     }
 
   end
