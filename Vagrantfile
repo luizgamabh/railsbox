@@ -87,8 +87,8 @@ config.vm.provision :chef_solo do |chef|
     chef.add_recipe "build-essential"
     chef.add_recipe "nodejs"
     chef.add_recipe "ruby_build"
-    chef.add_recipe "rvm::user_install"
-    chef.add_recipe "rvm::user" # testar se ele instala o ruby
+    # chef.add_recipe "rvm::user_install"
+    chef.add_recipe "rvm::user"
     chef.add_recipe "rvm::vagrant"
     chef.add_recipe "vim"
     chef.add_recipe "mysql::server"
@@ -101,8 +101,8 @@ config.vm.provision :chef_solo do |chef|
     chef.add_recipe "redisio::enable"
     chef.add_recipe "xml"
     chef.add_recipe "custombox"
-    chef.add_recipe "postgresql"
-    chef.add_recipe "postgresql::server"
+    # chef.add_recipe "postgresql"
+    # chef.add_recipe "postgresql::server"
 
     chef.json = {
       java: {
@@ -113,15 +113,10 @@ config.vm.provision :chef_solo do |chef|
         user_installs: [
           {
             user: 'vagrant',
-            upgrade: 'head',
-            rubies: ['2.2.1'],
-            rvm_gem_options: "--no-ri --no-rdoc",
             default_ruby: '2.2.1',
-            rvmrc: {
-              rvm_project_rvmrc: 1,
-              rvm_gemset_create_on_use_flag: 1,
-              rvm_pretty_print_flag: 1
-            },
+            rubies: ['2.2.1', '1.9.3'],
+            # upgrade: 'head',
+            rvm_gem_options: "--no-ri --no-rdoc",
             global_gems: [
               { name: 'bundler' },
               { name: 'sass' },
@@ -140,14 +135,6 @@ config.vm.provision :chef_solo do |chef|
         server: {
           run_state: 'start'
         },
-      },
-      postgresql: {
-        config: {
-          port: 5432
-        },
-        password: {
-          'postgres': '@r00t@'
-        }
       }
     }
 
