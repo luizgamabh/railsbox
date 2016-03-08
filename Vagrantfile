@@ -41,6 +41,7 @@ Vagrant.configure(2) do |config|
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
   config.vm.synced_folder "D:\\Web\\www.vagrant", "/var/www/html/"
+  config.vm.synced_folder "D:\\Web\\www\\ufmg", "/ufmg/"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -85,7 +86,7 @@ config.vm.provision :chef_solo do |chef|
     chef.add_recipe "java"
     chef.add_recipe "elasticsearch"
     chef.add_recipe "build-essential"
-    chef.add_recipe "nodejs"
+    chef.add_recipe "nodejs-setup"
     chef.add_recipe "ruby_build"
     # chef.add_recipe "rvm::user_install"
     chef.add_recipe "rvm::user"
@@ -101,13 +102,14 @@ config.vm.provision :chef_solo do |chef|
     chef.add_recipe "redisio::enable"
     chef.add_recipe "xml"
     chef.add_recipe "custombox"
-    # chef.add_recipe "postgresql"
-    # chef.add_recipe "postgresql::server"
 
     chef.json = {
       java: {
         install_flavor: "openjdk",
         jdk_version: "7"
+      },
+      'nodejs-setup': {
+      	version: "5.x"
       },
       rvm: {
         user_installs: [
