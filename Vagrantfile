@@ -27,7 +27,7 @@ Vagrant.configure(2) do |config|
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   # config.vm.network "private_network", ip: "192.168.33.10"
-  config.vm.network "forwarded_port", guest: 80, host: 8080
+  # config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.network "forwarded_port", guest: 3000, host: 3000
 
   # Create a public network, which generally matched to bridged network.
@@ -40,8 +40,8 @@ Vagrant.configure(2) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
-  config.vm.synced_folder "D:\\Web\\www.vagrant", "/var/www/html/"
-  config.vm.synced_folder "D:\\Web\\www\\ufmg", "/ufmg/"
+  config.vm.synced_folder "D:/Web/www.vagrant", "/var/www/html/"
+  # config.vm.synced_folder "D:\\Web\\www\\ufmg", "/ufmg/"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -92,6 +92,7 @@ config.vm.provision :chef_solo do |chef|
     chef.add_recipe "rvm::user"
     chef.add_recipe "rvm::vagrant"
     chef.add_recipe "vim"
+    chef.add_recipe "postgresql::server"
     chef.add_recipe "mysql::server"
     chef.add_recipe "mysql::client"
     chef.add_recipe "imagemagick"
@@ -137,6 +138,11 @@ config.vm.provision :chef_solo do |chef|
         server: {
           run_state: 'start'
         },
+      },
+      "postgresql": {
+        "password": {
+          "postgres": "@r00t@"
+        }
       }
     }
 
