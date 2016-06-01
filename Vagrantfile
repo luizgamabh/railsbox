@@ -29,6 +29,7 @@ Vagrant.configure(2) do |config|
   # config.vm.network "private_network", ip: "192.168.33.10"
   # config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.network "forwarded_port", guest: 3000, host: 3000
+  config.vm.network "forwarded_port", guest: 9000, host: 9000
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -52,7 +53,7 @@ Vagrant.configure(2) do |config|
   #   vb.gui = true
   #
   #   # Customize the amount of memory on the VM:
-    vb.memory = "4096"
+    vb.memory = "8192"
   end
 
   config.berkshelf.enabled = true
@@ -76,7 +77,8 @@ Vagrant.configure(2) do |config|
   # SHELL
 
 config.vm.provision :chef_solo do |chef|
-    # chef.version = "12.3.0"
+    # chef.version = "12.11.11"
+    chef.version = "12.10.40"
     chef.cookbooks_path = ["cookbooks", "site-cookbooks"]
 
     chef.add_recipe "apt"
@@ -103,47 +105,74 @@ config.vm.provision :chef_solo do |chef|
     chef.add_recipe "redisio::enable"
     chef.add_recipe "xml"
     chef.add_recipe "custombox"
+    # chef.add_recipe "thumbor"
 
     chef.json = {
-      java: {
-        install_flavor: "openjdk",
-        jdk_version: "7"
+      "java": {
+        "install_flavor": "openjdk",
+        "jdk_version": "7"
       },
-      'nodejs-setup': {
-      	version: "5.x"
+      "nodejs-setup": {
+        "version": "5.x"
       },
-      rvm: {
-        user_installs: [
+      "rvm": {
+        "user_installs": [
           {
-            user: 'vagrant',
-            default_ruby: '2.2.1',
-            rubies: ['2.2.1', '1.9.3'],
-            # upgrade: 'head',
-            rvm_gem_options: "--no-ri --no-rdoc",
-            global_gems: [
-              { name: 'bundler' },
-              { name: 'sass' },
-              { name: 'compass' }
+            "user": "vagrant",
+            "default_ruby": "2.2.4",
+            "rubies": [
+              "2.2.4",
+              "1.9.3"
+            ],
+            "rvm_gem_options": "--no-ri --no-rdoc",
+            "global_gems": [
+              {
+                "name": "bundler"
+              },
+              {
+                "name": "sass"
+              },
+              {
+                "name": "compass"
+              }
             ]
           }
         ]
       },
-      mysql: {
-        version: "5.5",
-        server_root_password: '',
-        bind_address: '0.0.0.0',
-        port: '3306'
+      "mysql": {
+        "version": "5.5",
+        "server_root_password": "",
+        "bind_address": "0.0.0.0",
+        "port": "3306"
       },
-      redis: {
-        server: {
-          run_state: 'start'
-        },
+      "redis": {
+        "server": {
+          "run_state": "start"
+        }
       },
       "postgresql": {
         "password": {
           "postgres": "@r00t@"
         }
       }
+      # "thumbor": {
+      #   "key": "AlexTsiprasSaysN0MoreAusterity",
+      #   "options": {
+      #     "QUALITY": 90,
+      #     "ALLOW_UNSAFE_URL": false,
+      #     "MAX_AGE": 2592000,
+      #     "UPLOAD_ENABLED": true,
+      #     "UPLOAD_PHOTO_STORAGE": true,
+      #     "STORAGE": "thumbor.storages.file_storage",
+      #     "FILE_STORAGE_ROOT_PATH": "/var/storage/thumbor/files",
+      #     "RESULT_STORAGE_FILE_STORAGE_ROOT_PATH": "/var/storage/thumbor/result/",
+      #     "RESULT_STORAGE_STORES_UNSAFE": false,
+      #     # "ENGINE": "opencv_engine",
+      #     "DETECTORS": [
+      #       "thumbor.detectors.queued_detector.queued_complete_detector"
+      #     ]
+      #   }
+      # }
     }
 
   end
