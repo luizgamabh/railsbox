@@ -167,7 +167,7 @@ config.vm.provision :chef_solo do |chef|
       #     "FILE_STORAGE_ROOT_PATH": "/var/storage/thumbor/files",
       #     "RESULT_STORAGE_FILE_STORAGE_ROOT_PATH": "/var/storage/thumbor/result/",
       #     "RESULT_STORAGE_STORES_UNSAFE": false,
-      #     # "ENGINE": "opencv_engine",
+      #     "ENGINE": "opencv",
       #     "DETECTORS": [
       #       "thumbor.detectors.queued_detector.queued_complete_detector"
       #     ]
