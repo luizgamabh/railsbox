@@ -77,8 +77,8 @@ Vagrant.configure(2) do |config|
   # SHELL
 
 config.vm.provision :chef_solo do |chef|
-    # chef.version = "12.11.11"
-    chef.version = "12.10.40"
+    # chef.version = "12.10.2"
+
     chef.cookbooks_path = ["cookbooks", "site-cookbooks"]
 
     chef.add_recipe "apt"

@@ -12,6 +12,50 @@ package "libxslt-dev" do
   )
 end
 
+# Thumbor begin
+
+execute "Install Python dependencies for Thumbor" do
+	command 'sudo apt-get install -y python-pip python-dev build-essential'
+end
+
+execute "Updates Python PIP" do
+	command 'sudo pip install --upgrade pip'
+end
+
+execute "Updates virtualenv" do
+	command 'sudo pip install --upgrade virtualenv'
+end
+
+execute "Add repository for thumbor package dependencies" do
+	command 'sudo add-apt-repository ppa:kirillshkrogalev/ffmpeg-next && sudo apt-get update -y'
+end
+
+execute "Install thumbor package dependencies" do
+	command 'sudo apt-get install -y ffmpeg libjpeg-dev libpng12-dev libtiff5-dev libjasper-dev libgtk2.0-dev python-numpy python-pycurl webp python-opencv'
+end
+
+execute "Install thumbor" do
+	command 'sudo pip install thumbor'
+end
+
+execute "Install things for facedetector" do
+	command 'sudo apt-get install -y vim build-essential python-software-properties python-opencv python-numpy python-scipy'
+end
+
+execute "Resolve thumbor issue" do
+	command 'sudo ln /dev/null /dev/raw1394'
+end
+
+execute "Setup thumbor folder" do
+	command 'sudo mkdir -p /etc/thumbor'
+end
+
+execute "Create thumbor config file" do
+	command "sudo sh -c 'thumbor-config > /etc/thumbor/thumbor.conf'"
+end
+
+# Thumbor end
+
 file '/home/vagrant/.gemrc' do
 	content 'gem: --no-ri --no-rdoc'
 	mode 0644
