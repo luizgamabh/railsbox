@@ -73,6 +73,10 @@ template '/etc/supervisor/thumbor.conf' do
 	mode '0755'
 end
 
+execute "Restart supervisor" do
+	command "sudo supervisorctl reload && sudo supervisorctl restart all"
+end
+
 # Thumbor end
 
 file '/home/vagrant/.gemrc' do

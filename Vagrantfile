@@ -105,8 +105,8 @@ config.vm.provision :chef_solo do |chef|
     chef.add_recipe "redisio::install"
     chef.add_recipe "redisio::enable"
     chef.add_recipe "xml"
-    chef.add_recipe "custombox"
     chef.add_recipe "supervisor"
+    chef.add_recipe "custombox"
     # chef.add_recipe "thumbor"
 
     chef.json = {
