@@ -54,14 +54,23 @@ execute "Create thumbor config file" do
 	command "sudo sh -c 'thumbor-config > /etc/thumbor/thumbor.conf'"
 end
 
-template '~/thumbor_config_script.rb' do
+template '/home/vagrant/thumbor_config_script.rb' do
 	source 'thumbor_config_script.rb'
 end
 
-execute 'sudo ruby ~/thumbor_config_script.rb'
+execute "Configure thumbor" do
+	command "sudo ruby /home/vagrant/thumbor_config_script.rb"
+end
 
-file '~/thumbor_config_script.rb' do
+file '/home/vagrant/thumbor_config_script.rb' do
 	action :delete
+end
+
+template '/etc/supervisor/thumbor.conf' do
+	source 'thumbor.conf'
+	owner 'root'
+	group 'root'
+	mode '0755'
 end
 
 # Thumbor end

@@ -29,6 +29,7 @@ Vagrant.configure(2) do |config|
   # config.vm.network "private_network", ip: "192.168.33.10"
   # config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.network "forwarded_port", guest: 3000, host: 3000
+  config.vm.network "forwarded_port", guest: 7000, host: 7000
   config.vm.network "forwarded_port", guest: 9000, host: 9000
 
   # Create a public network, which generally matched to bridged network.
@@ -105,6 +106,7 @@ config.vm.provision :chef_solo do |chef|
     chef.add_recipe "redisio::enable"
     chef.add_recipe "xml"
     chef.add_recipe "custombox"
+    chef.add_recipe "supervisor"
     # chef.add_recipe "thumbor"
 
     chef.json = {
@@ -154,6 +156,13 @@ config.vm.provision :chef_solo do |chef|
         "password": {
           "postgres": "@r00t@"
         }
+      },
+      "supervisor": {
+        "inet_port": 7000,
+        "inet_username": "vagrant",
+        "inet_password": "vagrant",
+        "dir": "/etc/supervisor",
+        "log_dir": "/var/log/supervisor"
       }
       # "thumbor": {
       #   "key": "AlexTsiprasSaysN0MoreAusterity",
