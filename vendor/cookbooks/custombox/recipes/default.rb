@@ -54,6 +54,16 @@ execute "Create thumbor config file" do
 	command "sudo sh -c 'thumbor-config > /etc/thumbor/thumbor.conf'"
 end
 
+template '~/thumbor_config_script.rb' do
+	source 'thumbor_config_script.rb'
+end
+
+execute 'sudo ruby ~/thumbor_config_script.rb'
+
+file '~/thumbor_config_script.rb' do
+	action :delete
+end
+
 # Thumbor end
 
 file '/home/vagrant/.gemrc' do

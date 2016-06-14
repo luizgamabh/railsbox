@@ -1,0 +1,20 @@
+file_name = "/etc/thumbor/thumbor.conf"
+contents = File.read(file_name)
+contents.gsub!(/(^\s*?)(?:#?\s*?)(QUALITY\s*?=\s*?)\d+/, '\1\290')
+contents.gsub!(/(^\s*?)(?:#?\s*?)(MAX_AGE\s*?=\s*?)\d+/, '\1\2604800')
+contents.gsub!(/(^\s*?)(?:#?\s*?)(STORAGE\s*?=\s*).*/, '\1\2\'thumbor.storages.file_storage\'')
+contents.gsub!(/(^\s*?)(?:#?\s*?)(RESULT_STORAGE\s*?=\s*)(.*)/, '\1\2\'thumbor.result_storages.file_storage\'')
+contents.gsub!(/(^\s*?)(?:#?\s*?)(SECURITY_KEY\s*?=\s*).*/, '\1\2\'AlexTsiprasSaysN0MoreAusterity\'')
+contents.gsub!(/(^\s*?)(?:#?\s*?)(STORAGE_EXPIRATION_SECONDS\s*?=\s*).*/, '\1\22592000')
+contents.gsub!(/(^\s*?)(?:#?\s*?)(FILE_STORAGE_ROOT_PATH\s*?=\s*).*/, '\1\2\'/var/storage/thumbor/storage\'')
+contents.gsub!(/(^\s*?)(?:#?\s*?)(UPLOAD_MAX_SIZE\s*?=\s*).*/, '\1\240000')
+contents.gsub!(/(^\s*?)(?:#?\s*?)(UPLOAD_ENABLED\s*?=\s*).*/, '\1\2True')
+contents.gsub!(/(^\s*?)(?:#?\s*?)(UPLOAD_PHOTO_STORAGE\s*?=\s*).*/, '\1\2\'thumbor.storages.file_storage\'')
+contents.gsub!(/(^\s*?)(?:#?\s*?)(UPLOAD_DELETE_ALLOWED\s*?=\s*).*/, '\1\2True')
+contents.gsub!(/(^\s*?)(?:#?\s*?)(UPLOAD_PUT_ALLOWED\s*?=\s*).*/, '\1\2True')
+contents.gsub!(/(^\s*?)(?:#?\s*?)(DETECTORS\s*?=\s*).*?\]/m, "\\1\\2[\r\n\t'thumbor.detectors.face_detector',\n\t'thumbor.detectors.feature_detector'\r\n]")
+contents.gsub!(/(^\s*?)(?:#?\s*?)(RESULT_STORAGE_EXPIRATION_SECONDS\s*?=\s*).*/, '\1\21209600')
+contents.gsub!(/(^\s*?)(?:#?\s*?)(RESULT_STORAGE_FILE_STORAGE_ROOT_PATH\s*?=\s*).*/, '\1\2\'/var/storage/thumbor/result_storage\'')
+contents.gsub!(/(^\s*?)(?:#?\s*?)(RESULT_STORAGE_STORES_UNSAFE\s*?=\s*).*/, '\1\2True')
+File.open(file_name, "w") {|file| file.puts contents }
+puts "Patched!"
