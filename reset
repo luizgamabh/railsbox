@@ -1,0 +1,4 @@
+#!/bin/sh
+vagrant destroy -f 2>/dev/null
+rm -Rf .vagrant/ berks-cookbooks/ Berksfile.lock 2>/dev/null
+echo Cleared successfull!
