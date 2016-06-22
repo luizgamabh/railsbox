@@ -86,6 +86,23 @@ config.vm.provision :chef_solo do |chef|
     chef.add_recipe "htop"
     chef.add_recipe "curl"
     chef.add_recipe "zlib"
+    chef.add_recipe "php"
+    chef.add_recipe "apache2"
+    chef.add_recipe "apache2::mod_rewrite"
+    chef.add_recipe "apache2::mod_deflate"
+    chef.add_recipe "apache2::mod_headers"
+    chef.add_recipe "apache2::mod_alias"
+    chef.add_recipe "apache2::mod_auth_basic"
+    chef.add_recipe "apache2::mod_autoindex"
+    chef.add_recipe "apache2::mod_dir"
+    chef.add_recipe "apache2::mod_env"
+    chef.add_recipe "apache2::mod_expires"
+    chef.add_recipe "apache2::mod_mime"
+    chef.add_recipe "apache2::mod_proxy"
+    chef.add_recipe "apache2::mod_proxy_balancer"
+    chef.add_recipe "apache2::mod_proxy_http"
+    chef.add_recipe "apache2::mod_setenvif"
+    chef.add_recipe "apache2::mod_status"
     chef.add_recipe "java"
     chef.add_recipe "elasticsearch"
     chef.add_recipe "build-essential"
@@ -110,6 +127,12 @@ config.vm.provision :chef_solo do |chef|
     # chef.add_recipe "thumbor"
 
     chef.json = {
+      "apache": {
+        "listen": [
+          "*:80"
+        ],
+        "contact": "luizgama@onrails.com.br"
+      },
       "java": {
         "install_flavor": "openjdk",
         "jdk_version": "7"
