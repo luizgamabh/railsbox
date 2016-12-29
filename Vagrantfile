@@ -121,10 +121,9 @@ config.vm.provision :chef_solo do |chef|
         "user_installs": [
           {
             "user": "vagrant",
-            "default_ruby": "2.2.4",
+            "default_ruby": "2.4.0",
             "rubies": [
-              "2.2.4",
-              "1.9.3"
+              "2.4.0"
             ],
             "rvm_gem_options": "--no-ri --no-rdoc",
             "global_gems": [
