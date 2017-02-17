@@ -29,6 +29,7 @@ Vagrant.configure(2) do |config|
   # config.vm.network "private_network", ip: "192.168.33.10"
   # config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.network "forwarded_port", guest: 3000, host: 3000
+  config.vm.network "forwarded_port", guest: 3000, host: 3001
   config.vm.network "forwarded_port", guest: 7000, host: 7000
   config.vm.network "forwarded_port", guest: 9000, host: 9000
 
@@ -43,6 +44,7 @@ Vagrant.configure(2) do |config|
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
   config.vm.synced_folder "D:/Web/www.vagrant", "/var/www/html/"
+  config.vm.synced_folder "D:/Web/www", "/var/www/web/"
   # config.vm.synced_folder "D:\\Web\\www\\ufmg", "/ufmg/"
 
   # Provider-specific configuration so you can fine-tune various
@@ -115,7 +117,7 @@ config.vm.provision :chef_solo do |chef|
         "jdk_version": "7"
       },
       "nodejs-setup": {
-        "version": "5.x"
+        "version": "6.x"
       },
       "rvm": {
         "user_installs": [
