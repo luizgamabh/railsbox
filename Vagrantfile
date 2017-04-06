@@ -12,7 +12,8 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/xenial64"
+  # config.vm.box = "ubuntu/trusty64"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -117,7 +118,7 @@ config.vm.provision :chef_solo do |chef|
         "jdk_version": "7"
       },
       "nodejs-setup": {
-        "version": "6.x"
+        "version": "7.x"
       },
       "rvm": {
         "user_installs": [
@@ -165,24 +166,6 @@ config.vm.provision :chef_solo do |chef|
         "dir": "/etc/supervisor",
         "log_dir": "/var/log/supervisor"
       }
-      # "thumbor": {
-      #   "key": "AlexTsiprasSaysN0MoreAusterity",
-      #   "options": {
-      #     "QUALITY": 90,
-      #     "ALLOW_UNSAFE_URL": false,
-      #     "MAX_AGE": 2592000,
-      #     "UPLOAD_ENABLED": true,
-      #     "UPLOAD_PHOTO_STORAGE": true,
-      #     "STORAGE": "thumbor.storages.file_storage",
-      #     "FILE_STORAGE_ROOT_PATH": "/var/storage/thumbor/files",
-      #     "RESULT_STORAGE_FILE_STORAGE_ROOT_PATH": "/var/storage/thumbor/result/",
-      #     "RESULT_STORAGE_STORES_UNSAFE": false,
-      #     "ENGINE": "opencv",
-      #     "DETECTORS": [
-      #       "thumbor.detectors.queued_detector.queued_complete_detector"
-      #     ]
-      #   }
-      # }
     }
 
   end
