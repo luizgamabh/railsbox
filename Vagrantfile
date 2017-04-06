@@ -12,8 +12,11 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/xenial64"
-  # config.vm.box = "ubuntu/trusty64"
+  # config.vm.box = "ubuntu/xenial64"
+  config.vm.box = "ubuntu/trusty64"
+
+  # config.ssh.username = "vagrant"
+  # config.ssh.password = "vagrant"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -80,7 +83,9 @@ Vagrant.configure(2) do |config|
   #   sudo apt-get install -y apache2
   # SHELL
 
-config.vm.provision :chef_solo do |chef|
+  # config.vm.provision "shell", inline: "useradd -m -U -G sudo -p vagrant vagrant"
+
+  config.vm.provision :chef_solo do |chef|
     # chef.version = "12.10.2"
 
     chef.cookbooks_path = ["cookbooks", "site-cookbooks"]
@@ -124,9 +129,9 @@ config.vm.provision :chef_solo do |chef|
         "user_installs": [
           {
             "user": "vagrant",
-            "default_ruby": "2.4.0",
+            "default_ruby": "2.4.1",
             "rubies": [
-              "2.4.0"
+              "2.4.1"
             ],
             "rvm_gem_options": "--no-ri --no-rdoc",
             "global_gems": [
@@ -144,7 +149,7 @@ config.vm.provision :chef_solo do |chef|
         ]
       },
       "mysql": {
-        "version": "5.5",
+        "version": "5.6",
         "server_root_password": "",
         "bind_address": "0.0.0.0",
         "port": "3306"

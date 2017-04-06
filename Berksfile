@@ -6,7 +6,7 @@ cookbook 'apt', '~> 2.8.2'
 cookbook 'htop', '~> 2.0.0'
 cookbook 'curl', '~> 2.0.1'
 cookbook 'zlib', '~> 2.0.1'
-cookbook 'java', '~> 1.35.0'
+cookbook 'java', '~> 1.48.0'
 cookbook 'elasticsearch', '~> 1.0.3'
 cookbook 'build-essential', '~> 2.2.4'
 cookbook 'openssl', '~> 4.4.0' # postgresql dependence
