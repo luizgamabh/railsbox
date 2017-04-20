@@ -30,11 +30,11 @@ Vagrant.configure(2) do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  # config.vm.network "private_network", ip: "192.168.33.10"
+  # config.vm.network "private_network", ip: "192.168.0.11"
   # config.vm.network "forwarded_port", guest: 80, host: 8080
-  config.vm.network "forwarded_port", guest: 3000, host: 3333, host_ip: '127.0.0.1'
-  config.vm.network "forwarded_port", guest: 7000, host: 7000, host_ip: '127.0.0.1'
-  config.vm.network "forwarded_port", guest: 9000, host: 9000, host_ip: '127.0.0.1'
+  config.vm.network "forwarded_port", guest: 3000, host: 3000
+  # config.vm.network "forwarded_port", guest: 7000, host: 7000, host_ip: ''
+  # config.vm.network "forwarded_port", guest: 9000, host: 9000, host_ip: ''
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -85,7 +85,7 @@ Vagrant.configure(2) do |config|
   # config.vm.provision "shell", inline: "useradd -m -U -G sudo -p vagrant vagrant"
 
   config.vm.provision :chef_solo do |chef|
-    # chef.version = "12.10.2"
+    chef.version = "12.5"
 
     chef.cookbooks_path = ["cookbooks", "site-cookbooks"]
 
@@ -98,9 +98,10 @@ Vagrant.configure(2) do |config|
     chef.add_recipe "build-essential"
     chef.add_recipe "nodejs-setup"
     chef.add_recipe "ruby_build"
-    # chef.add_recipe "rvm::user_install"
-    chef.add_recipe "rvm::user"
-    chef.add_recipe "rvm::vagrant"
+    # # chef.add_recipe "rvm::user_install"
+    # chef.add_recipe "rvm::user"
+    # chef.add_recipe "rvm::vagrant"
+    chef.add_recipe "chef_rvm"
     chef.add_recipe "vim"
     chef.add_recipe "postgresql::server"
     chef.add_recipe "mysql::server"
@@ -124,28 +125,18 @@ Vagrant.configure(2) do |config|
       "nodejs-setup": {
         "version": "7.x"
       },
-      "rvm": {
-        "user_installs": [
-          {
-            "user": "vagrant",
-            "default_ruby": "2.4.1",
-            "rubies": [
-              "2.4.1"
-            ],
-            "rvm_gem_options": "--no-ri --no-rdoc",
-            "global_gems": [
-              {
-                "name": "bundler"
-              },
-              {
-                "name": "sass"
-              },
-              {
-                "name": "compass"
-              }
-            ]
+      "chef_rvm": {
+        # "rvmrc": {
+        #   "rvm_gem_options": "--no-ri --no-rdoc",
+        #   "rvm_autoupdate_flag": 0
+        # },
+        "users": {
+          "vagrant": {
+            "rubies": {
+              "2.2.5": "install"
+            }
           }
-        ]
+        }
       },
       "mysql": {
         "version": "5.6",
