@@ -98,9 +98,6 @@ Vagrant.configure(2) do |config|
     chef.add_recipe "build-essential"
     chef.add_recipe "nodejs-setup"
     chef.add_recipe "ruby_build"
-    # # chef.add_recipe "rvm::user_install"
-    # chef.add_recipe "rvm::user"
-    # chef.add_recipe "rvm::vagrant"
     chef.add_recipe "chef_rvm"
     chef.add_recipe "vim"
     chef.add_recipe "postgresql::server"
@@ -108,14 +105,12 @@ Vagrant.configure(2) do |config|
     chef.add_recipe "mysql::client"
     chef.add_recipe "imagemagick"
     chef.add_recipe "imagemagick::devel"
-    # chef.add_recipe "imagemagick::rmagick"
     chef.add_recipe "redisio"
     chef.add_recipe "redisio::install"
     chef.add_recipe "redisio::enable"
     chef.add_recipe "xml"
     chef.add_recipe "supervisor"
     chef.add_recipe "custombox"
-    # chef.add_recipe "thumbor"
 
     chef.json = {
       "java": {
@@ -126,10 +121,6 @@ Vagrant.configure(2) do |config|
         "version": "7.x"
       },
       "chef_rvm": {
-        # "rvmrc": {
-        #   "rvm_gem_options": "--no-ri --no-rdoc",
-        #   "rvm_autoupdate_flag": 0
-        # },
         "users": {
           "vagrant": {
             "rubies": {
