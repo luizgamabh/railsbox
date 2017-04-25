@@ -1,4 +1,4 @@
-# RailsBox2016
+# RailsBox
 
 ```
  ██▀███   ▄▄▄       ██▓ ██▓      ██████  ▄▄▄▄    ▒█████  ▒██   ██▒
@@ -10,7 +10,7 @@
   ░▒ ░ ▒░  ▒   ▒▒ ░ ▒ ░░ ░ ▒  ░░ ░▒  ░ ░▒░▒   ░   ░ ▒ ▒░ ░░   ░▒ ░
   ░░   ░   ░   ▒    ▒ ░  ░ ░   ░  ░  ░   ░    ░ ░ ░ ░ ▒   ░    ░  
    ░           ░  ░ ░      ░  ░      ░   ░          ░ ░   ░    ░  
-                                  ░            By Luiz Gama / 2016
+                                  ░     By Luiz Gama / 2016 - 2017
 ```
 
 ## Requirements
@@ -22,7 +22,7 @@
     ```bash
     vagrant plugin install vagrant-berkshelf
     ```
-5. [IGNORE THIS STEP] Other plugins I use, just to document:
+5. [IGNORE THIS STEP] Another useful plugins I use, just to document:
 	```bash
     vagrant plugin install vagrant-librarian-chef-nochef
 	vagrant plugin install vagrant-omnibus
@@ -31,7 +31,7 @@
     ```
 6. Clone this repository:
 	```bash
-    git clone https://github.com/luizgamabh/railsbox2016.git
+    git clone https://github.com/luizgamabh/railsbox.git
     ```
 7. Voilà:
 	```bash
