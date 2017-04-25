@@ -1,11 +1,26 @@
-alias sassy='sass --compass --style compressed --watch .:.'
+# SSH aliases
 alias cl='ssh guto@52.1.58.96'
-alias ms='ssh ubuntu@54.152.2.57'
-alias ufmg='ssh luizgama@150.164.80.212'
-alias rb='git clean -df && git ls-files --modified | xargs git checkout --'
+alias itst='ssh its4minimify@40.123.46.194'
+alias itss='ssh sidekiq@13.77.104.211'
+
+# Git alises
+alias rb='git reset HEAD && git clean -df && git ls-files --modified | xargs git checkout --'
 alias c='git clone'
 alias glp="git log --date=local --format='%Cblue%h%Creset - %Cgreen%an%Creset - %Cred%s%Creset - %Cgreen%ad, %Creset%ar'"
-alias braganet='ssh root@150.164.80.188'
+
+# Linux alises
+alias ll='ls -lFa'
+
+# Directory alises
+alias www='cd /var/www/'
+alias html='cd /var/www/html'
+
+# Helper aliases
+alias clean_directory='find . -maxdepth 1 -type d ! -name . -prune -exec rm {} -Rf \; && find . -maxdepth 1 -type f -exec rm {} \;'
+alias sass-architecture='mkdir -p ./{base,components,generic,objects,partials,settings,tools,trumps} && find . -maxdepth 1 -type d ! -name . -prune -exec touch {}/README.md \;'
+
+# Company aliases
+alias alittlebit='cd /var/www/html/skillato/magazine/'
 
 # start agent if necessary
 # if [ -z $SSH_AGENT_PID ] && [ -z $SSH_TTY ]; then  # if no agent & not in ssh

@@ -66,6 +66,15 @@ file '/home/vagrant/thumbor_config_script.rb' do
 	action :delete
 end
 
+execute "Install gitflow-avh" do
+	# command "cd ~/ && wget --no-check-certificate -q https://raw.githubusercontent.com/petervanderdoes/gitflow-avh/develop/contrib/gitflow-installer.sh && sudo bash gitflow-installer.sh install develop; rm gitflow-installer.sh"
+	command "sudo apt-get install git-flow"
+end
+
+execute "Install git-up" do
+	command "sudo pip install git-up"
+end
+
 template '/etc/supervisor/thumbor.conf' do
 	source 'thumbor.conf'
 	owner 'root'
@@ -95,6 +104,10 @@ end
 
 template '/etc/motd' do
 	source 'motd_template'
+end
+
+template '/home/vagrant/.gitconfig' do
+	source 'gitconfig_template'
 end
 
 # execute 'install rails on default rvm ruby' do

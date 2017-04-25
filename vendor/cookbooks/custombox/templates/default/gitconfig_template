@@ -1,0 +1,34 @@
+[user]
+	name = Luiz Gustavo Freire Gama
+	email = luizgama@onrails.com.br
+[push]
+	default = simple
+
+[core]
+	autocrlf = true
+[alias]
+	conflicts = diff --name-only --diff-filter=U
+	empty = !git commit --allow-empty -m empty && git push
+	pat = !git push && git push --tags && git checkout master && git push && git checkout develop
+	pushalltags = !git push --all && git push --tags
+	mods = !git commit -am \"mods\" && git push
+	master = !git checkout master && git merge develop && git push && git checkout develop
+	statusb = status -sb
+	modified = ls-files --modified
+	release = !git flow release start $1 && git flow release finish $1
+	hist = log --all --graph --decorate --oneline --abbrev-commit
+	lp = log --date=local --format='%Cblue%h%Creset - %Cgreen%an%Creset - %Cred%s%Creset - %Cgreen%ad, %Creset%ar'
+	me = log --author Gama --date=local --format='%Cblue%h%Creset - %Cgreen%an%Creset - %Cred%s%Creset - %Cgreen%ad, %Creset%ar'
+	t = tag --sort=taggerdate
+	amend = commit --amend --no-edit
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true
+
+[git-up "fetch"]
+	all = true
+[credential]
+[gc]
+	autoDetach = false
